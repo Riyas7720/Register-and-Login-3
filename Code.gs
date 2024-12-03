@@ -2,8 +2,8 @@ var SHEET_ID = '';// Add your Google sheet ID here.
 var sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName("Users");//Change to your sheet name.
 
 function doGet(e) {
-  var page = e.parameter.page || 'login';
-  return HtmlService.createTemplateFromFile(page).evaluate().setTitle(page.charAt(0).toUpperCase() + page.slice(1));
+  var page = e.parameter.page || 'index';
+  return HtmlService.createTemplateFromFile(page).evaluate().setTitle("Register and Login");
 }
 
 function redirectToMain() {
