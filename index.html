@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <style>
+    body {
+      background-color: #E8F5E9;
+      font-family: 'Sansation', sans-serif;
+    }
+
+    .center {
+      margin: auto;
+      width: 60%;
+      padding: 2px;
+    }
+
+    fieldset {
+      border-radius: 15px;
+      border: 1px solid rgba(152, 228, 228, 0.5);
+      width: 90%;
+      max-width: 400px;
+      margin: 40px auto;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      animation: fadeIn 1s ease;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      animation: slideIn 1s ease;
+      background-color: teal;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #006666;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .toggle {
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      color: teal;
+      text-decoration: underline;
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+    .mycolor {
+      background-color: #3a67b1; /* Adjust color if needed */
+    }
+    .color {
+      color: #3a67b1; /* Adjust color if needed */
+    }
+  </style>
+</head>
+<body>
+  <div id="authContainer">
+    <fieldset class="w3-border-teal w3-small" id="loginContainer">
+      <legend><h1>Login</h1></legend>
+      <form id="loginForm" class="form">
+        <div class="w3-row center">
+          <label>Enter Username:</label>
+          <input type="text" id="loginUsername" placeholder="Username" name="username" autocomplete="off" required>
+        </div>
+        <div class="w3-row center">
+          <label>Enter Password:</label>
+          <input type="password" id="loginPassword" placeholder="Password" name="password" required>
+        </div>
+        <div class="w3-row center">
+          <input type="submit" value="Login">
+        </div>
+        <div class="toggle" onclick="toggleForms()">Don't have an account? Signup here!</div>
+      </form>
+    </fieldset>
+
+    <fieldset class="w3-border-teal w3-small" id="signupContainer" style="display:none;">
+      <legend><h1>Signup</h1></legend>
+      <form id="signupForm" class="form">
+        <div class="w3-row center">
+          <label>Enter Full Name:</label>
+          <input type="text" id="signupFullName" placeholder="Full Name" name="fullname" autocomplete="off" required>
+        </div>
+        <div class="w3-row center">
+          <label>Enter Email:</label>
+          <input type="email" id="signupEmail" placeholder="Email" name="email" autocomplete="off" required>
+        </div>
+        <div class="w3-row center">
+          <label>Enter Username:</label>
+          <input type="text" id="signupUsername" placeholder="Username" name="username" autocomplete="off" required>
+        </div>
+        <div class="w3-row center">
+          <label>Enter Password:</label>
+          <input type="password" id="signupPassword" placeholder="Password" name="password" required>
+        </div>
+        <div class="w3-row center">
+          <input type="submit" value="Signup">
+        </div>
+        <div class="toggle" onclick="toggleForms()">Already have an account? Login here!</div>
+      </form>
+    </fieldset>
+  </div>
+
+<div id="mainContainer" style="display:none;">
+  <!-- Sidebar -->
+  <div class="sidebar bg-primary text-white">
+    <h2 class="p-3 text-center">Menu</h2>
+    <ul class="list-unstyled px-3">
+      <li class="mb-3"><a href="#" class="text-white text-decoration-none"><i class="bi bi-house-fill"></i> Home</a></li>
+      <li class="mb-3"><a href="#" class="text-white text-decoration-none"><i class="bi bi-people-fill"></i> Profile</a></li>
+      <li class="mb-3"><a href="#" class="text-white text-decoration-none"><i class="bi bi-gear-fill"></i> Settings</a></li>
+      <li class="mb-3">
+        <a href="#" class="text-white text-decoration-none" onclick="logout()">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <button class="btn float-end px-5 text-white bg-danger" type="button" onclick="logout()">Log Out</button>
+ 
+    <div class="body p-4">
+      <center>
+        <h1 class="text-primary">Welcome to the Home Page</h1>
+        <p class="text-muted">Here you can explore and navigate your tasks.</p>
+      </center>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Sidebar Styles */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #3a67b1;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  .sidebar ul {
+    padding: 0;
+    margin: 0;
+  }
+  .sidebar ul li {
+    padding: 10px 20px;
+  }
+  .sidebar ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+  }
+
+  /* Content Styles */
+  .content {
+    margin-left: 250px;
+    padding: 20px;
+    background-color: #f4f9fd;
+    min-height: 100vh;
+  }
+  .header {
+    border-radius: 5px;
+  }
+  .body {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .body h1 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+</style>
+
+
+  <script>
+    function toggleForms() {
+      const loginContainer = document.getElementById('loginContainer');
+      const signupContainer = document.getElementById('signupContainer');
+      loginContainer.style.display = loginContainer.style.display === 'none' ? 'block' : 'none';
+      signupContainer.style.display = signupContainer.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function processLoginForm(event) {
+      event.preventDefault();
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+      google.script.run.withSuccessHandler(loginResponse).processLogin(username, password);
+    }
+
+    function loginResponse(response) {
+      if (response.success) {
+        document.getElementById('loginUsername').value = '';
+        document.getElementById('loginPassword').value = ''
+
+        document.getElementById('authContainer').style.display = 'none';
+        document.getElementById('mainContainer').style.display = 'block';
+      } else {
+        alert('Login failed: ' + response.message);
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', processLoginForm);
+
+    function processSignupForm(event) {
+      event.preventDefault();
+      const fullname = document.getElementById('signupFullName').value;
+      const email = document.getElementById('signupEmail').value;
+      const username = document.getElementById('signupUsername').value;
+      const password = document.getElementById('signupPassword').value;
+      google.script.run.withSuccessHandler(signupResponse).processSignup(fullname, email, username, password);
+    }
+
+    function signupResponse(response) {
+      if (response.success) {
+        alert('Signup successful! Please log in.');
+        toggleForms(); // Switch to the login form
+      } else {
+        alert('Signup failed: ' + response.message);
+      }
+    }
+
+    document.getElementById('signupForm').addEventListener('submit', processSignupForm);
+
+    function logout() {
+      google.script.run.withSuccessHandler(function() {
+        document.getElementById('authContainer').style.display = 'block';
+        document.getElementById('mainContainer').style.display = 'none';
+      }).logoutUser();
+    }
+  </script>
+</body>
+</html>
